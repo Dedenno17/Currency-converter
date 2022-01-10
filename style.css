@@ -56,6 +56,7 @@ ul.currency-list li{
     padding: 1rem 1rem .75rem 1rem;
     margin-bottom: 1rem;
     position: relative;
+    visibility: visible;
 }
 
 ul.currency-list li:last-child{
@@ -207,7 +208,7 @@ ul.add-currency-list li span{
     left: 0;
 }
 
-.add-currency-btn.open + ul.add-currency-list:hover{
+.add-currency-btn.open + ul.add-currency-list li:hover{
     background-color: #ddd;
 }
 
