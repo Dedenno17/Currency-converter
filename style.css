@@ -41,6 +41,14 @@ body{
 ul.currency-list{
     height: 500px;
     background-color: #222;
+    padding: 0 1.5rem 1rem 1.5rem;
+}
+
+ul.currency-list li{
+    background-color: #2d2d3d;
+    border-radius: 5px;
+    list-style: none;
+    padding: 1rem 1rem .75rem 1rem;
 }
 
 .add-currency-btn{
