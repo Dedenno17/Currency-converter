@@ -169,6 +169,7 @@ ul.add-currency-list li .flag{
 ul.add-currency-list li span{
     margin-left: 1rem;
     font-weight: bold;
+    pointer-events: none;
 }
 
 .add-currency-btn{

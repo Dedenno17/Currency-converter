@@ -5,10 +5,18 @@ function getDataCountries() {
             .then(response => response.results);
 }
 
+// getDataCountries();
+
+// function to get flag code
+function getFlagCode(country){
+    return country.toLowerCase();
+}
+
+
 // make element of currency that doesnt added yet
 function makeElCurrencyToAdd(country) {
     return `<li data-currency="${country.id}">
-                <img src="https://www.geonames.org/flags/l/${country["id"].toLowerCase()}.gif" class="flag" alt="nation-flag">
+                <img src="https://www.geonames.org/flags/l/${getFlagCode(country.id)}.gif" class="flag" alt="nation-flag">
                 <span>${country.currencyId} - ${country.currencyName}</span>
             </li>`;
 }
@@ -28,7 +36,7 @@ function addElCurrencyToAdd(countries) {
 
 // make element currency list
 function makeElCurrency(country) {
-    return `<img src="https://www.geonames.org/flags/l/${country["id"].toLowerCase()}.gif" class="flag" alt="nation-flag">
+    return `<img src="https://www.geonames.org/flags/l/${getFlagCode(country.id)}.gif" class="flag" alt="nation-flag">
             <div class="info">
                 <p class="currency-input"><span class="currency-symbol">${country.currencySymbol}</span><input placeholder="0.0000"></p>
                 <p class="currency-name"> ${country.currencyId} - ${country.currencyName}</p>
@@ -82,13 +90,7 @@ const currencyList = document.querySelector('.currency-list');
 currencyList.addEventListener('click', (e) => {
     const parent = e.target.parentElement.parentElement;
     const child = e.target.parentElement;
-    const last = document.querySelector('.currency-list li:last-child');
 
     parent.removeChild(child);
-
-    console.log(parent);
-    console.log(child);
-    console.log(last);
-    // console.log(last);
 })
 
