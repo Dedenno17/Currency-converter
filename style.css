@@ -72,11 +72,18 @@ ul.currency-list li.base-currency{
     height: 40px;
     border: 1px solid #fff;
     vertical-align: top;
+    pointer-events: none;
 }
 
 .info{
     display: inline-block;
     width: 78%;
+    pointer-events: none;
+
+}
+
+.info .currency-input{
+    pointer-events: visible;
 }
 
 .info .currency-input span{
