@@ -49,7 +49,7 @@ function makeElCurrency(country) {
             <div class="info">
                 <p class="currency-input"><span class="currency-symbol">${country.currencySymbol}</span><input class="currency-value" placeholder="0.0000"></p>
                 <p class="currency-name"><span class="currency-id">${country.currencyId}</span> - ${country.currencyName}</p>
-                <p class="base-currency-rate">1 <span class="base-current-currency">USD</span> = <span class="this-currency-value">0000</span> ${country.currencyId}</p>
+                <p class="base-currency-rate">1 ${country.currencyId} = <span class="this-currency-value">0000</span> <span class="base-current-currency">${country.currencyId}</span></p>
             </div>
             <span class="close">&times;</span>`;
 }
@@ -115,13 +115,11 @@ currencyList.addEventListener('click', async (e) => {
                 child.classList.remove('base-currency');
             }
             
-            child.children[1].lastElementChild.firstElementChild.innerHTML = e.target.id;
-            
+            // get and show the currency of base currency and current list currency
+            child.children[1].lastElementChild.lastElementChild.innerHTML = e.target.children[1].children[1].firstElementChild.textContent;
             const dataCurrencies = await getDataCurrecies(e.target.children[1].children[1].firstElementChild.textContent, child.children[1].children[1].firstElementChild.textContent);
-            child.children[1].lastElementChild.lastElementChild.innerHTML = dataCurrencies[`${child.children[1].children[1].firstElementChild.textContent}_${e.target.children[1].children[1].firstElementChild.textContent}`];
+            child.children[1].lastElementChild.firstElementChild.innerHTML = dataCurrencies[`${child.children[1].children[1].firstElementChild.textContent}_${e.target.children[1].children[1].firstElementChild.textContent}`];
             
-            // console.log(dataCurrencies);
-            console.log(child.children[1].children[1].firstElementChild.textContent);
         }
         e.target.classList.add('base-currency');
 
