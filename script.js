@@ -88,9 +88,11 @@ addCurrencyListContainer.addEventListener('click', async (e) => {
 // delete list in currency list
 const currencyList = document.querySelector('.currency-list');
 currencyList.addEventListener('click', (e) => {
-    const parent = e.target.parentElement.parentElement;
-    const child = e.target.parentElement;
-
-    parent.removeChild(child);
+    if( e.target.className == 'close' ){
+        const parent = e.target.parentElement.parentElement;
+        const child = e.target.parentElement;
+    
+        parent.removeChild(child);
+    }
 })
 
