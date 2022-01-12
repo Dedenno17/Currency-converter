@@ -22,6 +22,12 @@ function getFlagCode(country){
 }
 
 
+// calculate currencies
+function calculateCurrencies(currencies, key1, key2) {
+    return 
+}
+
+
 // make element of currency that doesnt added yet
 function makeElCurrencyToAdd(country) {
     return `<li data-currency="${country.id}">
@@ -127,14 +133,29 @@ currencyList.addEventListener('click', async (e) => {
 
     }
 
-    // if( e.target.className == 'currency-value' ){
-    //     e.target.addEventListener('keydown', async function() {
+    if( e.target.className == 'currency-value' ){
+        e.target.addEventListener('keydown', async function() {
             
-    //         // const currs = await getDataCountries();
-    //         console.log(this.parentElement.parentElement.parentElement);
-    //         console.log(this.value);
-    //     })
-    // }
+            const parent = this.parentElement.parentElement.parentElement.parentElement;
+            for( let child of parent.children ){
+                
+                // const currs = await getDataCurrencies();
+
+                const currencyValuePer1 = child.children[1].lastElementChild.firstElementChild.textContent;
+                const currencyBaseValue = this.value;
+
+                // child.children[1].firstElementChild.lastElementChild.value = currencyValuePer1 * currencyBaseValue;
+
+                // console.log(child.children[1].lastElementChild.firstElementChild.textContent);
+                console.log(currencyValuePer1 * currencyBaseValue);
+
+            }
+
+            // console.log(parent);
+            // console.log(this.parentElement.parentElement.parentElement);
+            // console.log(this.value);
+        })
+    }
 
     // console.log(e.target);
 })
