@@ -49,7 +49,7 @@ function makeElCurrency(country) {
             <div class="info">
                 <p class="currency-input"><span class="currency-symbol">${country.currencySymbol}</span><input class="currency-value" placeholder="0.0000"></p>
                 <p class="currency-name"><span class="currency-id">${country.currencyId}</span> - ${country.currencyName}</p>
-                <p class="base-currency-rate">1 <span class="this-currency">${country.currencyId}</span> = <span class="this-currency-value">0000</span> <span class="base-current-currency">${country.currencyId}</span></p>
+                <p class="base-currency-rate">1 <span class="this-currency">${country.currencyId}</span> = <span class="this-currency-value">1</span> <span class="base-current-currency">${country.currencyId}</span></p>
             </div>
             <span class="close">&times;</span>`;
 }
