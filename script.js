@@ -22,12 +22,6 @@ function getFlagCode(country){
 }
 
 
-// calculate currencies
-function calculateCurrencies(currencies, key1, key2) {
-    return 
-}
-
-
 // make element of currency that doesnt added yet
 function makeElCurrencyToAdd(country) {
     return `<li data-currency="${country.id}">
@@ -55,7 +49,7 @@ function makeElCurrency(country) {
             <div class="info">
                 <p class="currency-input"><span class="currency-symbol">${country.currencySymbol}</span><input class="currency-value" placeholder="0.0000"></p>
                 <p class="currency-name"><span class="currency-id">${country.currencyId}</span> - ${country.currencyName}</p>
-                <p class="base-currency-rate">1 ${country.currencyId} = <span class="this-currency-value">0000</span> <span class="base-current-currency">${country.currencyId}</span></p>
+                <p class="base-currency-rate">1 <span class="this-currency">${country.currencyId}</span> = <span class="this-currency-value">0000</span> <span class="base-current-currency">${country.currencyId}</span></p>
             </div>
             <span class="close">&times;</span>`;
 }
@@ -124,7 +118,7 @@ currencyList.addEventListener('click', async (e) => {
             // get and show the currency of base currency and current list currency
             child.children[1].lastElementChild.lastElementChild.innerHTML = e.target.children[1].children[1].firstElementChild.textContent;
             const dataCurrencies = await getDataCurrecies(e.target.children[1].children[1].firstElementChild.textContent, child.children[1].children[1].firstElementChild.textContent);
-            child.children[1].lastElementChild.firstElementChild.innerHTML = dataCurrencies[`${child.children[1].children[1].firstElementChild.textContent}_${e.target.children[1].children[1].firstElementChild.textContent}`];
+            child.children[1].lastElementChild.children[1].innerHTML = dataCurrencies[`${child.children[1].children[1].firstElementChild.textContent}_${e.target.children[1].children[1].firstElementChild.textContent}`];
             
         }
         e.target.classList.add('base-currency');
@@ -133,30 +127,33 @@ currencyList.addEventListener('click', async (e) => {
 
     }
 
-    if( e.target.className == 'currency-value' ){
-        e.target.addEventListener('keydown', async function() {
-            
-            const parent = this.parentElement.parentElement.parentElement.parentElement;
-            for( let child of parent.children ){
-                
-                // const currs = await getDataCurrencies();
-
-                const currencyValuePer1 = child.children[1].lastElementChild.firstElementChild.textContent;
-                const currencyBaseValue = this.value;
-
-                // child.children[1].firstElementChild.lastElementChild.value = currencyValuePer1 * currencyBaseValue;
-
-                // console.log(child.children[1].lastElementChild.firstElementChild.textContent);
-                console.log(currencyValuePer1 * currencyBaseValue);
-
-            }
-
-            // console.log(parent);
-            // console.log(this.parentElement.parentElement.parentElement);
-            // console.log(this.value);
-        })
-    }
+    
 
     // console.log(e.target);
 })
 
+currencyList.addEventListener('keydown', async (e) => {
+    if( e.target.className == 'currency-value' ){
+            // const parent = this.parentElement.parentElement.parentElement;
+            const parentLi = e.target.parentElement.parentElement.parentElement.parentElement;
+            for( let child of parentLi.children ){
+                if( child.classList.contains('base-currency') ){
+                    continue;
+                }else{   
+                    const curr1 = child.children[1].lastElementChild.lastElementChild.textContent;
+                    const curr2 = child.children[1].lastElementChild.firstElementChild.textContent;
+                    const childValue = child.children[1].firstElementChild.lastElementChild;
+
+                    const dataCurrencies = await getDataCurrecies(curr1, curr2);
+                    childValue.value =  dataCurrencies[`${curr1}_${curr2}`] * e.target.value;
+                }
+
+            }
+            
+        }
+})
+
+// async function calculateCurr (child, base,cur1, cur2) {
+//     const currencies = await getDataCurrecies(cur1, cur2);
+//     child.value = currencies[`${cur1}_${cur2}`] * base.value;
+// }
